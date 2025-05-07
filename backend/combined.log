@@ -1,0 +1,74 @@
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-05-07T12:49:32.064Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-05-07T12:49:32.081Z"}
+{"ip":"::1","level":"info","message":"GET /api/data/visualization/1","timestamp":"2025-05-07T12:50:07.769Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"datasetId":"1","level":"info","message":"Generating visualization data","timestamp":"2025-05-07T12:50:07.774Z","type":"line"}
+{"level":"info","message":"Response 200","method":"GET","path":"/visualization/1","timestamp":"2025-05-07T12:50:07.776Z"}
+{"ip":"::1","level":"info","message":"GET /api/data/visualization/1","timestamp":"2025-05-07T12:50:07.811Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"datasetId":"1","level":"info","message":"Generating visualization data","timestamp":"2025-05-07T12:50:07.814Z","type":"line"}
+{"level":"info","message":"Response 200","method":"GET","path":"/visualization/1","timestamp":"2025-05-07T12:50:07.815Z"}
+{"ip":"::1","level":"info","message":"GET /api/data/visualization/1","timestamp":"2025-05-07T12:50:14.819Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"datasetId":"1","level":"info","message":"Generating visualization data","timestamp":"2025-05-07T12:50:14.822Z","type":"bar"}
+{"level":"info","message":"Response 200","method":"GET","path":"/visualization/1","timestamp":"2025-05-07T12:50:14.825Z"}
+{"ip":"::1","level":"info","message":"POST /api/chat/query","timestamp":"2025-05-07T12:50:36.295Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"level":"info","message":"Processing chat query greedy algorithms ","timestamp":"2025-05-07T12:50:36.297Z"}
+{"level":"info","message":"Response 200","method":"POST","path":"/query","timestamp":"2025-05-07T12:50:36.298Z"}
+{"ip":"::1","level":"info","message":"POST /api/chat/query","timestamp":"2025-05-07T12:50:53.623Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"level":"info","message":"Processing chat query Show me education statistics","timestamp":"2025-05-07T12:50:53.625Z"}
+{"level":"info","message":"Response 200","method":"POST","path":"/query","timestamp":"2025-05-07T12:50:53.626Z"}
+{"ip":"::1","level":"info","message":"POST /api/chat/query","timestamp":"2025-05-07T12:51:05.306Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"level":"info","message":"Processing chat query Compare GDP across countries","timestamp":"2025-05-07T12:51:05.308Z"}
+{"level":"info","message":"Response 200","method":"POST","path":"/query","timestamp":"2025-05-07T12:51:05.308Z"}
+{"ip":"::1","level":"info","message":"GET /api/data/visualization/1","timestamp":"2025-05-07T12:51:11.960Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"datasetId":"1","level":"info","message":"Generating visualization data","timestamp":"2025-05-07T12:51:11.963Z","type":"line"}
+{"level":"info","message":"Response 200","method":"GET","path":"/visualization/1","timestamp":"2025-05-07T12:51:11.964Z"}
+{"ip":"::1","level":"info","message":"GET /api/data/visualization/1","timestamp":"2025-05-07T12:51:13.464Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"datasetId":"1","level":"info","message":"Generating visualization data","timestamp":"2025-05-07T12:51:13.467Z","type":"bar"}
+{"level":"info","message":"Response 200","method":"GET","path":"/visualization/1","timestamp":"2025-05-07T12:51:13.469Z"}
+{"ip":"::1","level":"info","message":"POST /api/chat/query","timestamp":"2025-05-07T12:52:08.029Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"level":"info","message":"Processing chat query what is the application propertiese of econimic ","timestamp":"2025-05-07T12:52:08.031Z"}
+{"level":"info","message":"Response 200","method":"POST","path":"/query","timestamp":"2025-05-07T12:52:08.032Z"}
+{"ip":"::1","level":"info","message":"POST /api/chat/query","timestamp":"2025-05-07T12:52:45.563Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"level":"info","message":"Processing chat query Show me education statistics","timestamp":"2025-05-07T12:52:45.564Z"}
+{"level":"info","message":"Response 200","method":"POST","path":"/query","timestamp":"2025-05-07T12:52:45.564Z"}
+{"ip":"::1","level":"info","message":"GET /api/data/visualization/1","timestamp":"2025-05-07T12:52:49.272Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"datasetId":"1","level":"info","message":"Generating visualization data","timestamp":"2025-05-07T12:52:49.273Z","type":"line"}
+{"level":"info","message":"Response 200","method":"GET","path":"/visualization/1","timestamp":"2025-05-07T12:52:49.341Z"}
+{"ip":"::1","level":"info","message":"GET /api/data/visualization/1","timestamp":"2025-05-07T12:52:50.208Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"datasetId":"1","level":"info","message":"Generating visualization data","timestamp":"2025-05-07T12:52:50.210Z","type":"bar"}
+{"level":"info","message":"Response 200","method":"GET","path":"/visualization/1","timestamp":"2025-05-07T12:52:50.211Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-05-07T12:58:42.420Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-05-07T12:58:42.430Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-05-07T12:58:44.618Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-05-07T12:58:44.626Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-05-07T12:58:46.751Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-05-07T12:58:46.758Z"}
+{"ip":"::1","level":"info","message":"GET /api/data/visualization/1","timestamp":"2025-05-07T12:58:51.344Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"datasetId":"1","level":"info","message":"Generating visualization data","timestamp":"2025-05-07T12:58:51.346Z","type":"bar"}
+{"level":"info","message":"Response 200","method":"GET","path":"/visualization/1","timestamp":"2025-05-07T12:58:51.348Z"}
+{"ip":"::1","level":"info","message":"GET /api/data/visualization/1","timestamp":"2025-05-07T12:59:04.258Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"datasetId":"1","level":"info","message":"Generating visualization data","timestamp":"2025-05-07T12:59:04.262Z","type":"line"}
+{"level":"info","message":"Response 200","method":"GET","path":"/visualization/1","timestamp":"2025-05-07T12:59:04.263Z"}
+{"ip":"::1","level":"info","message":"GET /api/data/visualization/1","timestamp":"2025-05-07T12:59:04.284Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"datasetId":"1","level":"info","message":"Generating visualization data","timestamp":"2025-05-07T12:59:04.286Z","type":"line"}
+{"level":"info","message":"Response 200","method":"GET","path":"/visualization/1","timestamp":"2025-05-07T12:59:04.288Z"}
+{"ip":"::1","level":"info","message":"GET /api/data/visualization/1","timestamp":"2025-05-07T12:59:07.692Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"datasetId":"1","level":"info","message":"Generating visualization data","timestamp":"2025-05-07T12:59:07.693Z","type":"bar"}
+{"level":"info","message":"Response 200","method":"GET","path":"/visualization/1","timestamp":"2025-05-07T12:59:07.695Z"}
+{"ip":"::1","level":"info","message":"GET /api/data/visualization/1","timestamp":"2025-05-07T12:59:14.406Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"datasetId":"1","level":"info","message":"Generating visualization data","timestamp":"2025-05-07T12:59:14.407Z","type":"line"}
+{"level":"info","message":"Response 200","method":"GET","path":"/visualization/1","timestamp":"2025-05-07T12:59:14.408Z"}
+{"ip":"::1","level":"info","message":"GET /api/data/visualization/1","timestamp":"2025-05-07T12:59:15.386Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"datasetId":"1","level":"info","message":"Generating visualization data","timestamp":"2025-05-07T12:59:15.387Z","type":"bar"}
+{"level":"info","message":"Response 200","method":"GET","path":"/visualization/1","timestamp":"2025-05-07T12:59:15.388Z"}
+{"ip":"::1","level":"info","message":"POST /api/chat/query","timestamp":"2025-05-07T12:59:20.005Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"level":"info","message":"Processing chat query hello","timestamp":"2025-05-07T12:59:20.006Z"}
+{"level":"info","message":"Response 200","method":"POST","path":"/query","timestamp":"2025-05-07T12:59:20.007Z"}
+{"ip":"::1","level":"info","message":"POST /api/chat/query","timestamp":"2025-05-07T12:59:28.815Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"level":"info","message":"Processing chat query Show me education statistics","timestamp":"2025-05-07T12:59:28.817Z"}
+{"level":"info","message":"Response 200","method":"POST","path":"/query","timestamp":"2025-05-07T12:59:28.818Z"}
+{"ip":"::1","level":"info","message":"GET /api/data/visualization/1","timestamp":"2025-05-07T12:59:36.414Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"datasetId":"1","level":"info","message":"Generating visualization data","timestamp":"2025-05-07T12:59:36.415Z","type":"line"}
+{"level":"info","message":"Response 200","method":"GET","path":"/visualization/1","timestamp":"2025-05-07T12:59:36.416Z"}
+{"ip":"::1","level":"info","message":"GET /api/data/visualization/1","timestamp":"2025-05-07T12:59:37.528Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"datasetId":"1","level":"info","message":"Generating visualization data","timestamp":"2025-05-07T12:59:37.529Z","type":"bar"}
+{"level":"info","message":"Response 200","method":"GET","path":"/visualization/1","timestamp":"2025-05-07T12:59:37.530Z"}
