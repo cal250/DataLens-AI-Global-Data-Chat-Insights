@@ -37,7 +37,7 @@ DataLens AI is an innovative platform that enables natural conversations with gl
 
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/datalens-ai.git
+git clone https://github.com/cal250/DataLens-AI-Global-Data-Chat-Insights
 cd datalens-ai
 ```
 
