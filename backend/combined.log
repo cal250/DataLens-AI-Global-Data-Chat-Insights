@@ -72,3 +72,9 @@
 {"ip":"::1","level":"info","message":"GET /api/data/visualization/1","timestamp":"2025-05-07T12:59:37.528Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
 {"datasetId":"1","level":"info","message":"Generating visualization data","timestamp":"2025-05-07T12:59:37.529Z","type":"bar"}
 {"level":"info","message":"Response 200","method":"GET","path":"/visualization/1","timestamp":"2025-05-07T12:59:37.530Z"}
+{"ip":"::1","level":"info","message":"GET /api/data/visualization/1","timestamp":"2025-05-07T13:12:00.607Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"datasetId":"1","level":"info","message":"Generating visualization data","timestamp":"2025-05-07T13:12:00.744Z","type":"line"}
+{"level":"info","message":"Response 200","method":"GET","path":"/visualization/1","timestamp":"2025-05-07T13:12:00.801Z"}
+{"ip":"::1","level":"info","message":"GET /api/data/visualization/1","timestamp":"2025-05-07T13:12:00.846Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"datasetId":"1","level":"info","message":"Generating visualization data","timestamp":"2025-05-07T13:12:00.848Z","type":"line"}
+{"level":"info","message":"Response 200","method":"GET","path":"/visualization/1","timestamp":"2025-05-07T13:12:00.851Z"}

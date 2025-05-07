@@ -1,13 +1,16 @@
-import OpenAI from 'openai';
+import { Ollama } from 'ollama-node';
 import { logger } from '../utils/logger';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const ollama = new Ollama();
 
 export interface ChatResponse {
   response: string;
   suggestedQuestions: string[];
+}
+
+interface Message {
+  role: string;
+  content: string;
 }
 
 export class AIService {
@@ -35,7 +38,7 @@ When responding:
     return AIService.instance;
   }
 
-  public async processQuery(query: string, history: Array<{ role: string; content: string }>): Promise<ChatResponse> {
+  public async processQuery(query: string, history: Array<Message>): Promise<ChatResponse> {
     try {
       const messages = [
         { role: 'system', content: this.systemPrompt },
@@ -43,31 +46,28 @@ When responding:
         { role: 'user', content: query }
       ];
 
-      const completion = await openai.chat.completions.create({
-        model: 'gpt-4',
-        messages: messages as any,
+      const prompt = messages.map(m => `${m.role}: ${m.content}`).join('\n');
+      const completion = await ollama.generate(prompt, {
+        model: process.env.OLLAMA_MODEL || 'llama2',
         temperature: 0.7,
         max_tokens: 500,
       });
 
-      const response = completion.choices[0]?.message?.content || 'I apologize, but I could not generate a response.';
+      const response = completion.output || 'I apologize, but I could not generate a response.';
 
       // Generate follow-up questions
-      const followUpCompletion = await openai.chat.completions.create({
-        model: 'gpt-4',
-        messages: [
-          { role: 'system', content: 'Generate 3 relevant follow-up questions based on the previous response. Keep them concise and data-focused.' },
-          { role: 'user', content: `Based on this response: "${response}", suggest 3 follow-up questions.` }
-        ],
+      const followUpPrompt = `System: Generate 3 relevant follow-up questions based on the previous response. Keep them concise and data-focused.\nUser: Based on this response: "${response}", suggest 3 follow-up questions.`;
+      const followUpCompletion = await ollama.generate(followUpPrompt, {
+        model: process.env.OLLAMA_MODEL || 'llama2',
         temperature: 0.7,
         max_tokens: 150,
       });
 
-      const followUpText = followUpCompletion.choices[0]?.message?.content || '';
+      const followUpText = followUpCompletion.output || '';
       const suggestedQuestions = followUpText
         .split('\n')
-        .map(q => q.replace(/^\d+\.\s*/, '').trim())
-        .filter(q => q.length > 0)
+        .map((q: string) => q.replace(/^\d+\.\s*/, '').trim())
+        .filter((q: string) => q.length > 0)
         .slice(0, 3);
 
       return {

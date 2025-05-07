@@ -1,175 +1,94 @@
-import React, { useEffect, useState } from 'react';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-  ChartData,
-  ChartOptions,
-} from 'chart.js';
-import { Line, Bar } from 'react-chartjs-2';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+import { ChartType } from '../../backend/src/config/googleCloud';
 
 interface DataVisualizationProps {
-  datasetId?: string;
-  type?: 'line' | 'bar';
+  data: any[];
+  type: ChartType;
+  options?: {
+    title?: string;
+    [key: string]: any;
+  };
+}
+
+declare global {
+  interface Window {
+    google: any;
+  }
 }
 
 export const DataVisualization: React.FC<DataVisualizationProps> = ({
-  datasetId = '1',
-  type = 'line',
+  data,
+  type,
+  options = {},
 }) => {
-  const [data, setData] = useState<ChartData<'line' | 'bar'> | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const chartRef = useRef<HTMLDivElement>(null);
+  const chartInstance = useRef<any>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        setError(null);
-        const response = await fetch(`/api/data/visualization/${datasetId}?type=${type}`);
-        
-        if (!response.ok) {
-          throw new Error('Failed to fetch visualization data');
-        }
+    // Load Google Charts
+    const script = document.createElement('script');
+    script.src = 'https://www.gstatic.com/charts/loader.js';
+    script.async = true;
+    script.onload = () => {
+      window.google.charts.load('current', { packages: ['corechart'] });
+      window.google.charts.setOnLoadCallback(drawChart);
+    };
+    document.body.appendChild(script);
 
-        const visualizationData = await response.json();
-        setData(visualizationData);
-      } catch (err) {
-        setError('Failed to load visualization data');
-        console.error('Error fetching visualization:', err);
-      } finally {
-        setIsLoading(false);
-      }
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (window.google && window.google.charts) {
+      drawChart();
+    }
+  }, [data, type, options]);
+
+  const drawChart = () => {
+    if (!chartRef.current) return;
+
+    const chartData = window.google.visualization.arrayToDataTable(data);
+    const chartOptions = {
+      title: options.title || 'Data Visualization',
+      ...options,
     };
 
-    fetchData();
-  }, [datasetId, type]);
+    if (chartInstance.current) {
+      chartInstance.current.clearChart();
+    }
 
-  const options: ChartOptions<'line' | 'bar'> = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top' as const,
-        labels: {
-          font: {
-            family: 'Inter',
-            size: 14,
-          },
-        },
-      },
-      title: {
-        display: true,
-        text: 'Data Visualization',
-        font: {
-          family: 'Inter',
-          size: 18,
-          weight: 600,
-        },
-        padding: {
-          top: 10,
-          bottom: 20,
-        },
-      },
-    },
-    scales: {
-      y: {
-        beginAtZero: true,
-        grid: {
-          color: 'rgba(0, 0, 0, 0.1)',
-        },
-        ticks: {
-          font: {
-            family: 'Inter',
-          },
-        },
-      },
-      x: {
-        grid: {
-          color: 'rgba(0, 0, 0, 0.1)',
-        },
-        ticks: {
-          font: {
-            family: 'Inter',
-          },
-        },
-      },
-    },
-    animation: {
-      duration: 1000,
-      easing: 'easeInOutQuart',
-    },
+    switch (type) {
+      case 'line':
+        chartInstance.current = new window.google.visualization.LineChart(chartRef.current);
+        break;
+      case 'bar':
+        chartInstance.current = new window.google.visualization.BarChart(chartRef.current);
+        break;
+      case 'pie':
+        chartInstance.current = new window.google.visualization.PieChart(chartRef.current);
+        break;
+      case 'scatter':
+        chartInstance.current = new window.google.visualization.ScatterChart(chartRef.current);
+        break;
+      default:
+        console.error(`Unsupported chart type: ${type}`);
+        return;
+    }
+
+    chartInstance.current.draw(chartData, chartOptions);
   };
-
-  if (isLoading) {
-    return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="w-full h-full min-h-[300px] p-6 bg-white rounded-2xl shadow-lg flex items-center justify-center"
-      >
-        <div className="flex space-x-2">
-          <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce" />
-          <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce delay-100" />
-          <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce delay-200" />
-        </div>
-      </motion.div>
-    );
-  }
-
-  if (error) {
-    return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="w-full h-full min-h-[300px] p-6 bg-white rounded-2xl shadow-lg flex items-center justify-center text-red-500"
-      >
-        {error}
-      </motion.div>
-    );
-  }
-
-  if (!data) {
-    return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="w-full h-full min-h-[300px] p-6 bg-white rounded-2xl shadow-lg flex items-center justify-center text-gray-500"
-      >
-        No data available
-      </motion.div>
-    );
-  }
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="w-full h-full min-h-[300px] p-6 bg-white rounded-2xl shadow-lg"
+      exit={{ opacity: 0, y: -20 }}
+      className="bg-white rounded-lg shadow-lg p-4"
     >
-      {type === 'line' ? (
-        <Line data={data as ChartData<'line'>} options={options} />
-      ) : (
-        <Bar data={data as ChartData<'bar'>} options={options} />
-      )}
+      <div ref={chartRef} className="w-full h-[400px]" />
     </motion.div>
   );
 }; 
