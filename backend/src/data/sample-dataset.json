@@ -1,0 +1,19 @@
+{
+  "id": "global-temperatures",
+  "name": "Global Temperature Anomalies",
+  "description": "Annual global temperature anomalies from 1880 to present",
+  "type": "time-series",
+  "source": "NASA GISS Surface Temperature Analysis",
+  "data": {
+    "years": [1880, 1881, 1882, 1883, 1884, 1885, 1886, 1887, 1888, 1889, 1890],
+    "temperatures": [-0.16, -0.09, -0.10, -0.17, -0.28, -0.30, -0.31, -0.35, -0.17, -0.10, -0.35],
+    "units": "Celsius",
+    "baseline": "1951-1980 average"
+  },
+  "metadata": {
+    "lastUpdated": "2024-03-15",
+    "version": "1.0",
+    "format": "JSON",
+    "license": "Public Domain"
+  }
+} 

@@ -6,12 +6,14 @@ interface Message {
   role: 'user' | 'assistant';
   content: string;
   suggestedQuestions?: string[];
+  model?: 'ollama' | 'vertex';
 }
 
 export const ChatInterface: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedModel, setSelectedModel] = useState<'ollama' | 'vertex'>('ollama');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -32,14 +34,15 @@ export const ChatInterface: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/chat/query', {
+      const response = await fetch('http://localhost:3000/api/chat/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          message: input,
+          query: input,
           history: messages,
+          model: selectedModel,
         }),
       });
 
@@ -52,6 +55,7 @@ export const ChatInterface: React.FC = () => {
         role: 'assistant',
         content: data.response,
         suggestedQuestions: data.suggestedQuestions,
+        model: data.model,
       };
       setMessages(prev => [...prev, assistantMessage]);
     } catch (error) {
@@ -71,6 +75,34 @@ export const ChatInterface: React.FC = () => {
 
   return (
     <div className="flex flex-col h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+      <div className="p-4 border-b">
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-semibold text-gray-800">Chat</h2>
+          <div className="flex space-x-2">
+            <button
+              onClick={() => setSelectedModel('ollama')}
+              className={`px-3 py-1 rounded-lg ${
+                selectedModel === 'ollama'
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-100 text-gray-600'
+              }`}
+            >
+              Ollama
+            </button>
+            <button
+              onClick={() => setSelectedModel('vertex')}
+              className={`px-3 py-1 rounded-lg ${
+                selectedModel === 'vertex'
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-100 text-gray-600'
+              }`}
+            >
+              Vertex AI
+            </button>
+          </div>
+        </div>
+      </div>
+
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         <AnimatePresence>
           {messages.map((message, index) => (
@@ -94,7 +126,12 @@ export const ChatInterface: React.FC = () => {
                 transition={{ type: 'spring', stiffness: 300 }}
               >
                 <p className="whitespace-pre-wrap">{message.content}</p>
-                {message.suggestedQuestions && (
+                {message.model && (
+                  <p className="text-xs text-gray-500 mt-1">
+                    Powered by {message.model === 'ollama' ? 'Ollama' : 'Vertex AI'}
+                  </p>
+                )}
+                {message.suggestedQuestions && message.suggestedQuestions.length > 0 && (
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}

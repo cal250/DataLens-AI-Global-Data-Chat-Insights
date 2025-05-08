@@ -13,14 +13,15 @@ export class ChatController {
 
   public async processQuery(req: Request, res: Response): Promise<void> {
     try {
-      const { query, sessionId = 'default' } = req.body;
+      const { query, sessionId = 'default', model = 'ollama' } = req.body;
+      console.log('Received request:', { query, sessionId, model });
 
       if (!query) {
         res.status(400).json({ error: 'Query is required' });
         return;
       }
 
-      logger.info('Processing chat query', { query, timestamp: new Date().toISOString() });
+      // logger.info('Processing chat query', { query, model, timestamp: new Date().toISOString() });
 
       // Get or initialize chat history for this session
       if (!this.chatHistory.has(sessionId)) {
@@ -29,7 +30,7 @@ export class ChatController {
       const history = this.chatHistory.get(sessionId)!;
 
       // Process query with AI service
-      const result = await this.aiService.processQuery(query, history);
+      const result = await this.aiService.processQuery(query, history, model);
 
       // Update chat history
       history.push({ role: 'user', content: query });
@@ -43,13 +44,15 @@ export class ChatController {
       res.json({
         response: result.response,
         suggestedQuestions: result.suggestedQuestions,
+        model: result.model,
       });
 
-      logger.info('Response sent', {
-        method: req.method,
-        path: req.path,
-        timestamp: new Date().toISOString(),
-      });
+      // logger.info('Response sent', {
+      //   method: req.method,
+      //   path: req.path,
+      //   model: result.model,
+      //   timestamp: new Date().toISOString(),
+      // });
     } catch (error) {
       logger.error('Error processing chat query:', error);
       res.status(500).json({ error: 'Failed to process query' });

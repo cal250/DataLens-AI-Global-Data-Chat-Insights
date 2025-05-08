@@ -78,3 +78,58 @@
 {"ip":"::1","level":"info","message":"GET /api/data/visualization/1","timestamp":"2025-05-07T13:12:00.846Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
 {"datasetId":"1","level":"info","message":"Generating visualization data","timestamp":"2025-05-07T13:12:00.848Z","type":"line"}
 {"level":"info","message":"Response 200","method":"GET","path":"/visualization/1","timestamp":"2025-05-07T13:12:00.851Z"}
+{"level":"info","message":"Created directory: C:\\Users\\pc\\Desktop\\Datalens\\backend\\storage","timestamp":"2025-05-07T18:19:19.293Z"}
+{"level":"info","message":"Created directory: C:\\Users\\pc\\Desktop\\Datalens\\backend\\storage\\datasets","timestamp":"2025-05-07T18:19:19.301Z"}
+{"level":"info","message":"Created directory: C:\\Users\\pc\\Desktop\\Datalens\\backend\\storage\\charts","timestamp":"2025-05-07T18:19:19.302Z"}
+{"level":"info","message":"File saved successfully: datasets/global-temperatures.json","timestamp":"2025-05-07T18:19:19.316Z"}
+{"level":"info","message":"Dataset uploaded successfully: global-temperatures","timestamp":"2025-05-07T18:19:19.317Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-05-07T18:40:01.696Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-05-07T18:40:01.705Z"}
+{"ip":"::1","level":"info","message":"POST /api/chat/query","timestamp":"2025-05-07T18:40:54.908Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"level":"info","message":"Processing chat query greedy algorithms ","timestamp":"2025-05-07T18:40:54.933Z"}
+{"level":"info","message":"Response 200","method":"POST","path":"/query","timestamp":"2025-05-07T18:40:54.943Z"}
+{"ip":"::1","level":"info","message":"POST /api/chat/query","timestamp":"2025-05-07T18:41:47.069Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"level":"info","message":"Processing chat query Compare GDP across countries","timestamp":"2025-05-07T18:41:47.077Z"}
+{"level":"info","message":"Response 200","method":"POST","path":"/query","timestamp":"2025-05-07T18:41:47.080Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-05-07T18:44:45.050Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-05-07T18:44:45.068Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-05-07T18:45:34.785Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-05-07T18:45:34.790Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-05-08T20:01:40.312Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-05-08T20:01:40.321Z"}
+{"ip":"::1","level":"info","message":"POST /api/chat/query","timestamp":"2025-05-08T20:01:55.844Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"level":"info","message":"Response 400","method":"POST","path":"/query","timestamp":"2025-05-08T20:01:55.847Z"}
+{"ip":"::1","level":"info","message":"POST /api/chat/query","timestamp":"2025-05-08T20:02:25.602Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"}
+{"level":"info","message":"Response 400","method":"POST","path":"/query","timestamp":"2025-05-08T20:02:25.603Z"}
+{"ip":"::1","level":"info","message":"POST /api/chat/query","timestamp":"2025-05-08T20:03:01.753Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0"}
+{"level":"info","message":"Response 400","method":"POST","path":"/query","timestamp":"2025-05-08T20:03:01.758Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-05-08T20:05:29.717Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-05-08T20:05:29.744Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-05-08T20:06:04.256Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-05-08T20:06:04.262Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-05-08T20:06:27.413Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-05-08T20:06:27.432Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-05-08T20:06:29.775Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-05-08T20:06:29.781Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-05-08T20:12:11.478Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-05-08T20:12:11.489Z"}
+{"ip":"::1","level":"info","message":"POST /api/chat/query","timestamp":"2025-05-08T20:12:28.333Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0"}
+{"level":"info","message":"Response 400","method":"POST","path":"/query","timestamp":"2025-05-08T20:12:28.345Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-05-08T20:13:31.484Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-05-08T20:13:31.491Z"}
+{"ip":"::1","level":"info","message":"POST /api/chat/query","timestamp":"2025-05-08T20:13:33.133Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0"}
+{"level":"info","message":"Response 400","method":"POST","path":"/query","timestamp":"2025-05-08T20:13:33.144Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-05-08T20:14:34.748Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-05-08T20:14:34.755Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-05-08T20:14:58.136Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-05-08T20:14:58.142Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-05-08T20:15:02.383Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-05-08T20:15:02.389Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-05-08T20:15:09.303Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-05-08T20:15:09.318Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-05-08T20:15:33.499Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-05-08T20:15:33.505Z"}
+{"ip":"::1","level":"info","message":"POST /api/chat/query","timestamp":"2025-05-08T20:15:42.168Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0"}
+{"level":"info","message":"Response 200","method":"POST","path":"/query","timestamp":"2025-05-08T20:15:42.234Z"}
+{"ip":"::1","level":"info","message":"POST /api/chat/query","timestamp":"2025-05-08T20:17:29.871Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0"}
+{"level":"info","message":"Response 200","method":"POST","path":"/query","timestamp":"2025-05-08T20:17:29.892Z"}

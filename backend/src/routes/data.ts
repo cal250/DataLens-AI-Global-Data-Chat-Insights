@@ -1,33 +1,50 @@
 import { Router } from 'express';
+import { DataService } from '../services/dataService';
+import { VisualizationService } from '../services/visualizationService';
 import { logger } from '../utils/logger';
 
-export const dataRouter = Router();
+const dataRouter = Router();
+const dataService = DataService.getInstance();
+const visualizationService = VisualizationService.getInstance();
 
 dataRouter.get('/datasets', async (req, res) => {
   try {
-    // TODO: Implement dataset retrieval from MongoDB
-    logger.info('Fetching available datasets');
-    
-    // Temporary mock response
-    const datasets = [
-      {
-        id: '1',
-        name: 'Global Temperature Data',
-        description: 'Historical temperature records from around the world',
-        type: 'time-series'
-      },
-      {
-        id: '2',
-        name: 'Education Statistics',
-        description: 'Global education metrics and indicators',
-        type: 'tabular'
-      }
-    ];
-    
+    const datasets = await dataService.getDatasets();
     res.json(datasets);
   } catch (error) {
     logger.error('Error fetching datasets:', error);
     res.status(500).json({ error: 'Failed to fetch datasets' });
+  }
+});
+
+dataRouter.get('/datasets/:id', async (req, res) => {
+  try {
+    const dataset = await dataService.getDatasetData(req.params.id);
+    res.json(dataset);
+  } catch (error) {
+    logger.error('Error fetching dataset:', error);
+    res.status(500).json({ error: 'Failed to fetch dataset' });
+  }
+});
+
+dataRouter.post('/datasets', async (req, res) => {
+  try {
+    const { dataset, data } = req.body;
+    await dataService.uploadDataset(dataset, data);
+    res.json({ message: 'Dataset uploaded successfully' });
+  } catch (error) {
+    logger.error('Error uploading dataset:', error);
+    res.status(500).json({ error: 'Failed to upload dataset' });
+  }
+});
+
+dataRouter.delete('/datasets/:id', async (req, res) => {
+  try {
+    await dataService.deleteDataset(req.params.id);
+    res.json({ message: 'Dataset deleted successfully' });
+  } catch (error) {
+    logger.error('Error deleting dataset:', error);
+    res.status(500).json({ error: 'Failed to delete dataset' });
   }
 });
 
@@ -36,25 +53,16 @@ dataRouter.get('/visualization/:datasetId', async (req, res) => {
     const { datasetId } = req.params;
     const { type = 'line' } = req.query;
     
-    // TODO: Implement data retrieval and processing for visualization
-    logger.info('Generating visualization data', { datasetId, type });
+    const data = await dataService.getDatasetData(datasetId);
+    const chartConfig = await visualizationService.generateChart(data, type as any, {
+      title: `Visualization of ${datasetId}`,
+    });
     
-    // Temporary mock response
-    const data = {
-      labels: ['2018', '2019', '2020', '2021', '2022'],
-      datasets: [
-        {
-          label: 'Sample Data',
-          data: [65, 59, 80, 81, 56],
-          borderColor: 'rgb(75, 192, 192)',
-          tension: 0.1
-        }
-      ]
-    };
-    
-    res.json(data);
+    res.json(chartConfig);
   } catch (error) {
     logger.error('Error generating visualization:', error);
     res.status(500).json({ error: 'Failed to generate visualization' });
   }
-}); 
+});
+
+export { dataRouter }; 
