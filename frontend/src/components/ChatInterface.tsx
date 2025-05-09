@@ -1,12 +1,29 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MicrophoneIcon, PaperAirplaneIcon } from '@heroicons/react/24/solid';
+import { 
+  MicrophoneIcon, 
+  PaperAirplaneIcon, 
+  CpuChipIcon, 
+  CommandLineIcon, 
+  ChartBarIcon, 
+  CogIcon,
+  BeakerIcon,
+  CodeBracketIcon,
+  RocketLaunchIcon,
+  SparklesIcon,
+  XMarkIcon
+} from '@heroicons/react/24/solid';
 
 interface Message {
-  role: 'user' | 'assistant';
+  role: 'user' | 'assistant' | 'system';
   content: string;
-  suggestedQuestions?: string[];
-  model?: 'ollama' | 'vertex';
+  type?: 'text' | 'code' | 'chart' | 'analysis';
+  metadata?: {
+    model?: string;
+    confidence?: number;
+    processingTime?: number;
+    tokens?: number;
+  };
 }
 
 export const ChatInterface: React.FC = () => {
@@ -14,6 +31,9 @@ export const ChatInterface: React.FC = () => {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [selectedModel, setSelectedModel] = useState<'ollama' | 'vertex'>('ollama');
+  const [showTechnicalPanel, setShowTechnicalPanel] = useState(false);
+  const [activeTab, setActiveTab] = useState<'chat' | 'code' | 'analysis'>('chat');
+  const [showChat, setShowChat] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -28,7 +48,12 @@ export const ChatInterface: React.FC = () => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
-    const userMessage: Message = { role: 'user', content: input };
+    setShowChat(true);
+    const userMessage: Message = { 
+      role: 'user', 
+      content: input,
+      type: 'text'
+    };
     setMessages(prev => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
@@ -54,8 +79,13 @@ export const ChatInterface: React.FC = () => {
       const assistantMessage: Message = {
         role: 'assistant',
         content: data.response,
-        suggestedQuestions: data.suggestedQuestions,
-        model: data.model,
+        type: data.type || 'text',
+        metadata: {
+          model: data.model,
+          confidence: data.confidence,
+          processingTime: data.processingTime,
+          tokens: data.tokens
+        }
       };
       setMessages(prev => [...prev, assistantMessage]);
     } catch (error) {
@@ -63,152 +93,201 @@ export const ChatInterface: React.FC = () => {
       setMessages(prev => [...prev, {
         role: 'assistant',
         content: 'Sorry, I encountered an error. Please try again.',
+        type: 'text'
       }]);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleSuggestedQuestion = (question: string) => {
-    setInput(question);
-  };
-
   return (
-    <div className="flex flex-col h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      <div className="p-4 border-b">
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold text-gray-800">Chat</h2>
-          <div className="flex space-x-2">
-            <button
-              onClick={() => setSelectedModel('ollama')}
-              className={`px-3 py-1 rounded-lg ${
-                selectedModel === 'ollama'
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-100 text-gray-600'
-              }`}
-            >
-              Ollama
-            </button>
-            <button
-              onClick={() => setSelectedModel('vertex')}
-              className={`px-3 py-1 rounded-lg ${
-                selectedModel === 'vertex'
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-100 text-gray-600'
-              }`}
-            >
-              Vertex AI
-            </button>
-          </div>
-        </div>
+    <div className="fixed inset-0 bg-black flex">
+      {/* Left Sidebar - Technical Tools */}
+      <div className="w-16 bg-gray-900 border-r border-gray-800 flex flex-col items-center py-4">
+        <button
+          onClick={() => setActiveTab('chat')}
+          className={`p-3 rounded-lg mb-4 ${activeTab === 'chat' ? 'bg-blue-600' : 'hover:bg-gray-800'}`}
+        >
+          <SparklesIcon className="h-6 w-6" />
+        </button>
+        <button
+          onClick={() => setActiveTab('code')}
+          className={`p-3 rounded-lg mb-4 ${activeTab === 'code' ? 'bg-blue-600' : 'hover:bg-gray-800'}`}
+        >
+          <CodeBracketIcon className="h-6 w-6" />
+        </button>
+        <button
+          onClick={() => setActiveTab('analysis')}
+          className={`p-3 rounded-lg mb-4 ${activeTab === 'analysis' ? 'bg-blue-600' : 'hover:bg-gray-800'}`}
+        >
+          <BeakerIcon className="h-6 w-6" />
+        </button>
+        <div className="flex-1" />
+        <button
+          onClick={() => setShowTechnicalPanel(!showTechnicalPanel)}
+          className={`p-3 rounded-lg ${showTechnicalPanel ? 'bg-blue-600' : 'hover:bg-gray-800'}`}
+        >
+          <CogIcon className="h-6 w-6" />
+        </button>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col bg-black">
+        {/* Header */}
+        <div className="h-16 bg-gray-900 border-b border-gray-800 flex items-center justify-between px-6">
+          <div className="flex items-center space-x-4">
+            <RocketLaunchIcon className="h-8 w-8 text-blue-500" />
+            <h1 className="text-xl font-bold text-white">DataLens AI</h1>
+          </div>
+          <div className="flex items-center space-x-4">
+            <select
+              value={selectedModel}
+              onChange={(e) => setSelectedModel(e.target.value as 'ollama' | 'vertex')}
+              className="bg-gray-800 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="ollama">Ollama</option>
+              <option value="vertex">Vertex AI</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Messages Area */}
         <AnimatePresence>
-          {messages.map((message, index) => (
+          {showChat && (
             <motion.div
-              key={index}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              className={`flex ${
-                message.role === 'user' ? 'justify-end' : 'justify-start'
-              }`}
+              className="flex-1 overflow-y-auto p-6 space-y-6"
             >
-              <motion.div
-                className={`max-w-[70%] rounded-2xl p-4 shadow-lg ${
-                  message.role === 'user'
-                    ? 'bg-blue-500 text-white'
-                    : 'bg-white text-gray-800'
-                }`}
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: 'spring', stiffness: 300 }}
-              >
-                <p className="whitespace-pre-wrap">{message.content}</p>
-                {message.model && (
-                  <p className="text-xs text-gray-500 mt-1">
-                    Powered by {message.model === 'ollama' ? 'Ollama' : 'Vertex AI'}
-                  </p>
-                )}
-                {message.suggestedQuestions && message.suggestedQuestions.length > 0 && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.2 }}
-                    className="mt-2 space-y-2"
+              {messages.map((message, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                >
+                  <div
+                    className={`max-w-[80%] rounded-2xl p-4 ${
+                      message.role === 'user'
+                        ? 'bg-blue-600'
+                        : message.role === 'system'
+                        ? 'bg-gray-800'
+                        : 'bg-gray-900'
+                    }`}
                   >
-                    {message.suggestedQuestions.map((question, qIndex) => (
-                      <motion.button
-                        key={qIndex}
-                        onClick={() => handleSuggestedQuestion(question)}
-                        className="block w-full text-left text-sm text-blue-500 hover:text-blue-600 transition-colors"
-                        whileHover={{ x: 5 }}
-                        transition={{ type: 'spring', stiffness: 400 }}
-                      >
-                        {question}
-                      </motion.button>
-                    ))}
-                  </motion.div>
-                )}
-              </motion.div>
+                    <div className="prose prose-invert max-w-none">
+                      {message.content}
+                    </div>
+                    {message.metadata && (
+                      <div className="mt-2 text-xs text-gray-400 flex items-center space-x-4">
+                        <span>Model: {message.metadata.model}</span>
+                        <span>Confidence: {message.metadata.confidence}%</span>
+                        <span>Time: {message.metadata.processingTime}ms</span>
+                        <span>Tokens: {message.metadata.tokens}</span>
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+              <div ref={messagesEndRef} />
             </motion.div>
-          ))}
+          )}
         </AnimatePresence>
-        {isLoading && (
+
+        {/* Input Area - Now at the bottom */}
+        <div className="fixed bottom-0 left-16 right-0 p-6 bg-gray-900 border-t border-gray-800">
+          <form onSubmit={handleSubmit} className="flex space-x-4 max-w-7xl mx-auto">
+            <div className="flex-1 relative">
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Ask anything..."
+                className="w-full p-4 bg-gray-800 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                disabled={isLoading}
+              />
+              {isLoading && (
+                <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+                  <div className="flex space-x-2">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" />
+                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce delay-100" />
+                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce delay-200" />
+                  </div>
+                </div>
+              )}
+            </div>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="p-4 bg-blue-600 rounded-xl hover:bg-blue-700 transition-colors disabled:opacity-50"
+            >
+              <PaperAirplaneIcon className="h-6 w-6" />
+            </button>
+          </form>
+        </div>
+      </div>
+
+      {/* Technical Panel */}
+      <AnimatePresence>
+        {showTechnicalPanel && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="flex justify-start"
+            initial={{ width: 0 }}
+            animate={{ width: 400 }}
+            exit={{ width: 0 }}
+            className="bg-gray-900 border-l border-gray-800 overflow-hidden"
           >
-            <div className="bg-white rounded-2xl p-4 shadow-lg">
-              <div className="flex space-x-2">
-                <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" />
-                <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce delay-100" />
-                <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce delay-200" />
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-bold text-white">Technical Panel</h2>
+                <button
+                  onClick={() => setShowTechnicalPanel(false)}
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
+                  <XMarkIcon className="h-6 w-6" />
+                </button>
+              </div>
+              <div className="space-y-6">
+                <div className="bg-gray-800 rounded-lg p-4">
+                  <h3 className="text-lg font-semibold text-white mb-2">System Metrics</h3>
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-gray-300">
+                      <span>CPU Usage</span>
+                      <span>45%</span>
+                    </div>
+                    <div className="flex justify-between text-gray-300">
+                      <span>Memory Usage</span>
+                      <span>2.3GB</span>
+                    </div>
+                    <div className="flex justify-between text-gray-300">
+                      <span>GPU Usage</span>
+                      <span>78%</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-gray-800 rounded-lg p-4">
+                  <h3 className="text-lg font-semibold text-white mb-2">Model Performance</h3>
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-gray-300">
+                      <span>Response Time</span>
+                      <span>245ms</span>
+                    </div>
+                    <div className="flex justify-between text-gray-300">
+                      <span>Token Rate</span>
+                      <span>120/s</span>
+                    </div>
+                    <div className="flex justify-between text-gray-300">
+                      <span>Context Length</span>
+                      <span>8K</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>
         )}
-        <div ref={messagesEndRef} />
-      </div>
-
-      <motion.form
-        onSubmit={handleSubmit}
-        className="p-4 bg-white border-t shadow-lg"
-        initial={{ y: 100 }}
-        animate={{ y: 0 }}
-        transition={{ type: 'spring', stiffness: 300 }}
-      >
-        <div className="flex space-x-4">
-          <motion.button
-            type="button"
-            className="p-2 text-gray-500 hover:text-gray-600"
-            title="Voice input"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <MicrophoneIcon className="h-6 w-6" />
-          </motion.button>
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask about global data..."
-            className="flex-1 p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-            disabled={isLoading}
-          />
-          <motion.button
-            type="submit"
-            className="p-2 text-blue-500 hover:text-blue-600 disabled:opacity-50"
-            disabled={isLoading}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <PaperAirplaneIcon className="h-6 w-6" />
-          </motion.button>
-        </div>
-      </motion.form>
+      </AnimatePresence>
     </div>
   );
 }; 
